@@ -1,0 +1,53 @@
+--------------
+IR-Receptor
+
+IR1 - VCC
+IR2 - RA5
+IR3 - RA4
+IR4 - RA3
+IR5 - RA2
+IR6 - RA1
+IR7 - RA0
+IR8 - GND
+
+--------------
+IR-Led
+
+IR1 - VCC
+IR2 - RD2
+IR3 - RD3
+IR4 - RD4
+IR5 - RD5
+IR6 - RD6
+IR7 - RD7
+IR8 - GND
+
+-----------------
+Encoders
+
+Encoder1 - RB1
+Encoder2 - RB2
+
+----------------
+LEDS-Simples
+
+LED1 - RD0
+LED2 - RD1
+LED3 - RC6
+LED4 - RC7
+
+----------------
+Ponte H
+
+Enable-Motor1 - RC1 (PWM)
+Enable-Motor2 - RC2  (PWM)
+
+Motor1-Pin1 - RB4
+Motor1-Pin2 - RB5
+(RB4 != RB5)
+
+Motor2-Pin1 - RB7
+Motor2-Pin2 - RB6
+(RB6 != RB7)
+
+-----------------------------
