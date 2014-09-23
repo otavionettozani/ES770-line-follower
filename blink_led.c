@@ -7,13 +7,8 @@
 
 //------------------ CODE DEFINES --------------------------//
 
-#define SENSOR_INPUT TRISA
-#define WHITE_OFFSET_H 0
-#define WHITE_OFFSET_L 0
-
-#define LED_IR_ENABLE LATD
-#define LED_IR_DIR TRISD
-
+#define LED PORTDbits.RD0
+#define LED_DIR TRISDbits.RD0
 
 //------------------ WAIT FUNCTIONS -----------------------//
 
@@ -87,77 +82,26 @@ void delay_1s(){
 
 //----------------- MATH FUNCTIONS ------------------------//
 
-/* retorno>0 <=> i1>i2 --- retorno<0 <=> i1<i2 --- retorno=0 <=> i1=i2 */
-int twoByteComp(int i1H, int i1l, int i2h, int i2l){
-	if(i1H!=i2H){
-		return i1H-i2H;
-	}
-	return i1L-i2L;
-}
-
 
 //----------------CONFIG FUNCTIONS ---------------------//
 
-void configADC(){
-
-	SENSOR_INPUT = 0x3F;
-
-	ADCON1 = 0x09;
-	ADCON0 = 0x01;
-	ADCON2 = 0b10001000;
-
-}
-
-void configLEDS_DIR{
-	LED_IR_DIR = 0x0;
-}
-
 
 //----------------CORE FUNCTIONS -----------------------//
-
-/* retorno = [-3 , 3] a depender da posicao da linha */
-float readSensors(){
-	char activeLeds, activeLedsCounter;
-	char i;
-	char retorno;
-	
-	
-	LED_IR_ENABLE = 0xFC;
-	for(i=0;i<6;i++){
-		ADCON0 = i<<2;
-		delay_10ms();
-		ADCON0 = ADCON0 | 1;
-		delay_10ms();
-		ADCON0 = ADCON0 | 2;
-		while(ADCON0 & 2);
-		if(twoByteComp(ADRESH, ADRESL, WHITE_OFFSET_H, WHITE_OFFSET_L)<0){
-			activeLeds = activeLeds | (1<<i);
-		}
-	}
-	LED_IR_ENABLE = 0x00;
-	
-	//posicao da linha a partir dos valors lidos
-	activeLedsCounter =0;	
-	for(i=0; i<6; i++){
-		if(activeLeds&(1<<i)){
-			retorno += (2.5-i);
-			activeLedsCounter++;
-		}
-	}
-	
-	return retorno/activeLedsCounter
-}
 
 
 //------------------   MAIN    -------------------------//
 
 void main(void){
+	char i = 0;	
 	
-	configADC();
-	configLEDS_DIR();
+	ADCON0 = 0x0f;
+	LED_DIR = 0;
 
 	while(1){
-
+	
+	a = !a;
+	delay_1s();
+	LED = a;
 
 	}
 
