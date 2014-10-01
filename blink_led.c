@@ -93,7 +93,7 @@ void delay_1s(){
 
 void main(void){
 	char i = 0;	
-	
+	char a;
 	ADCON0 = 0x0f;
 	LED_DIR = 0;
 

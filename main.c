@@ -4,6 +4,19 @@
 #pragma config FOSC = HS
 #pragma config LVP = OFF
 
+//------------------ PID CONSTANTS --------------------------//
+
+#define MOTOR1_KP 1
+#define MOTOR1_KI 0
+#define MOTOR1_KD 0
+
+#define MOTOR2_KP 1
+#define MOTOR2_KI 0
+#define MOTOR2_KD 0
+
+#define SYSTEM_KP 1
+#define SYSTEM_KI 0
+#define SYSTEM_KD 0
 
 //------------------ CODE DEFINES --------------------------//
 
@@ -145,20 +158,21 @@ float readSensors(){
 		}
 	}
 	
-	return retorno/activeLedsCounter
+	return retorno/activeLedsCounter;
 }
 
 
 //------------------   MAIN    -------------------------//
 
 void main(void){
+	float linePosition;
 	
 	configADC();
 	configLEDS_DIR();
 
 	while(1){
-
-
+		linePosition = readSensors();
+		
 	}
 
 
