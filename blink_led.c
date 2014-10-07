@@ -7,8 +7,21 @@
 
 //------------------ CODE DEFINES --------------------------//
 
-#define LED PORTDbits.RD0
-#define LED_DIR TRISDbits.RD0
+#define LEDS LATD
+#define LED_DIR TRISD
+#define IR_RECEPTOR_7 PORTAbits.RA0
+#define IR_RECEPTOR_6 PORTAbits.RA1
+#define IR_RECEPTOR_5 PORTAbits.RA2
+#define IR_RECEPTOR_4 PORTAbits.RA3
+#define IR_RECEPTOR_3 PORTAbits.RA4
+#define IR_RECEPTOR_2 PORTAbits.RA5
+
+#define IR_RECEPTOR_7_DIR TRISAbits.RA0
+#define IR_RECEPTOR_6_DIR TRISAbits.RA1
+#define IR_RECEPTOR_5_DIR TRISAbits.RA2
+#define IR_RECEPTOR_4_DIR TRISAbits.RA3
+#define IR_RECEPTOR_3_DIR TRISAbits.RA4
+#define IR_RECEPTOR_2_DIR TRISAbits.RA5
 
 //------------------ WAIT FUNCTIONS -----------------------//
 
@@ -93,16 +106,28 @@ void delay_1s(){
 
 void main(void){
 	char i = 0;	
-	char a;
+	char a = 0xff;
 	ADCON0 = 0x0f;
 	LED_DIR = 0;
 
+
+	IR_RECEPTOR_7_DIR =1;
+	IR_RECEPTOR_6_DIR =1;
+	IR_RECEPTOR_5_DIR =1;
+	IR_RECEPTOR_4_DIR =1;
+	IR_RECEPTOR_3_DIR =1;
+	IR_RECEPTOR_2_DIR =1;
+	
 	while(1){
 	
-	a = !a;
-	delay_1s();
-	LED = a;
-
+		if(IR_RECEPTOR_7 || IR_RECEPTOR_6 || IR_RECEPTOR_5 || IR_RECEPTOR_4 || IR_RECEPTOR_3 || IR_RECEPTOR_2){
+			a = 0xff;
+		}
+		else{
+			a = ~a;
+			delay_1s();
+		}
+		LEDS = a;
 	}
 
 

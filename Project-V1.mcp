@@ -23,6 +23,14 @@ subfolder_inc=
 subfolder_obj=
 subfolder_lib=
 subfolder_lkr=
+[FILE_SUBFOLDERS]
+file_000=.
+[GENERATED_FILES]
+file_000=no
+[OTHER_FILES]
+file_000=no
+[FILE_INFO]
+file_000=blink_led.c
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=
