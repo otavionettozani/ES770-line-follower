@@ -120,13 +120,8 @@ void main(void){
 	
 	while(1){
 	
-		if(IR_RECEPTOR_7 || IR_RECEPTOR_6 || IR_RECEPTOR_5 || IR_RECEPTOR_4 || IR_RECEPTOR_3 || IR_RECEPTOR_2){
-			a = 0xff;
-		}
-		else{
-			a = ~a;
-			delay_1s();
-		}
+		a = ~a;
+		delay_1s();
 		LEDS = a;
 	}
 

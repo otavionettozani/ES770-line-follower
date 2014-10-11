@@ -3,7 +3,10 @@
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
+//------------------ MOTOR CONSTANTS -----------------------//
 
+#define FOWARD 1
+#define BACKWARD 0
 //------------------ PID CONSTANTS --------------------------//
 
 #define MOTOR1_KP 1
@@ -21,11 +24,29 @@
 //------------------ CODE DEFINES --------------------------//
 
 #define SENSOR_INPUT TRISA
-#define WHITE_OFFSET_H 0
-#define WHITE_OFFSET_L 0
+#define WHITE_OFFSET_H 0x00
+#define WHITE_OFFSET_L 0xff
 
+#define LED1 PORTDbits.RD0
+#define LED2 PORTDbits.RD1
 #define LED_IR_ENABLE LATD
 #define LED_IR_DIR TRISD
+
+#define MOTOR1_ENABLE PORTCbits.RC1
+#define MOTOR1_ENABLE_DIR TRISCbits.RC1
+#define MOTOR2_ENABLE PORTCbits.RC2
+#define MOTOR2_ENABLE_DIR TRISCbits.RC2
+
+#define MOTOR1_A PORTBbits.RB4
+#define MOTOR1_A_DIR TRISBbits.RB4
+#define MOTOR1_B PORTBbits.RB5
+#define MOTOR1_B_DIR TRISBbits.RB5
+
+#define MOTOR2_A PORTBbits.RB6
+#define MOTOR2_A_DIR TRISBbits.RB6
+#define MOTOR2_B PORTBbits.RB7
+#define MOTOR2_B_DIR TRISBbits.RB7
+
 
 
 //------------------ WAIT FUNCTIONS -----------------------//
@@ -101,7 +122,7 @@ void delay_1s(){
 //----------------- MATH FUNCTIONS ------------------------//
 
 /* retorno>0 <=> i1>i2 --- retorno<0 <=> i1<i2 --- retorno=0 <=> i1=i2 */
-int twoByteComp(int i1H, int i1l, int i2h, int i2l){
+int twoByteComp(int i1H, int i1L, int i2H, int i2L){
 	if(i1H!=i2H){
 		return i1H-i2H;
 	}
@@ -121,8 +142,17 @@ void configADC(){
 
 }
 
-void configLEDS_DIR{
-	LED_IR_DIR = 0x0;
+void configLEDS_DIR(){
+	LED_IR_DIR = 0x00;
+}
+
+void configureMotors(){
+	MOTOR1_ENABLE_DIR = 0;
+	MOTOR2_ENABLE_DIR = 0;
+	MOTOR1_A_DIR = 0;
+	MOTOR1_B_DIR = 0;
+	MOTOR2_A_DIR = 0;
+	MOTOR2_B_DIR = 0;
 }
 
 
@@ -135,7 +165,6 @@ float readSensors(){
 	char retorno;
 	
 	
-	LED_IR_ENABLE = 0xFC;
 	for(i=0;i<6;i++){
 		ADCON0 = i<<2;
 		delay_10ms();
@@ -143,36 +172,72 @@ float readSensors(){
 		delay_10ms();
 		ADCON0 = ADCON0 | 2;
 		while(ADCON0 & 2);
-		if(twoByteComp(ADRESH, ADRESL, WHITE_OFFSET_H, WHITE_OFFSET_L)<0){
+		if(twoByteComp(ADRESH, ADRESL, WHITE_OFFSET_H, WHITE_OFFSET_L)>0){
 			activeLeds = activeLeds | (1<<i);
 		}
 	}
-	LED_IR_ENABLE = 0x00;
 	
 	//posicao da linha a partir dos valors lidos
-	activeLedsCounter =0;	
+	activeLedsCounter =0;
 	for(i=0; i<6; i++){
 		if(activeLeds&(1<<i)){
 			retorno += (2.5-i);
 			activeLedsCounter++;
+			
 		}
+	}
+
+	if(activeLedsCounter >=3){
+		LED1 = 1;
+	}else {
+		LED1 = 0;
 	}
 	
 	return retorno/activeLedsCounter;
 }
 
 
+void startMotor1(char direction){
+	MOTOR1_ENABLE = 1;
+
+	MOTOR1_A = direction;
+	MOTOR1_B = !direction;
+
+
+}
+
+void startMotor2(char direction){
+	MOTOR2_ENABLE = 1;
+
+	MOTOR2_A = direction;
+	MOTOR2_B = !direction;
+
+} 
+
+
+void stopMotor1(){
+	MOTOR1_ENABLE = 0;
+}
+void stopMotor2(){
+	MOTOR2_ENABLE = 0;
+}
+
+
+
 //------------------   MAIN    -------------------------//
 
 void main(void){
-	float linePosition;
-	
+	char a = 0x00;
+
 	configADC();
 	configLEDS_DIR();
+	LED_IR_ENABLE = 0;
+	configureMotors();
+	startMotor1(FOWARD);
+	startMotor2(BACKWARD);
 
 	while(1){
-		linePosition = readSensors();
-		
+		readSensors();
 	}
 
 
