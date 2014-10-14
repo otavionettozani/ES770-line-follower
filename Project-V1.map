@@ -1,38 +1,33 @@
 MPLINK 5.00, LINKER
-Linker Map File - Created Fri Oct 10 22:29:29 2014
+Linker Map File - Created Tue Oct 14 19:18:36 2014
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                _entry_scn       code   0x000000    program   0x000006
                    .cinit    romdata   0x000006    program   0x000002
-             .code_main.o       code   0x000008    program   0x0004bc
-                     PROG       code   0x0004c4    program   0x0002de
-               _cinit_scn       code   0x0007a2    program   0x00009e
-                    .code       code   0x000840    program   0x000020
-             _startup_scn       code   0x000860    program   0x00001c
-         .code_fxd0808u.o       code   0x00087c    program   0x00001c
-           .code___init.o       code   0x000898    program   0x000002
-        .romdata___init.o    romdata   0x00089a    program   0x000000
-        .idata___init.o_i    romdata   0x00089a    program   0x000000
-      .romdata_fxd0808u.o    romdata   0x00089a    program   0x000000
-      .idata_fxd0808u.o_i    romdata   0x00089a    program   0x000000
-          .romdata_main.o    romdata   0x00089a    program   0x000000
-          .idata_main.o_i    romdata   0x00089a    program   0x000000
-            .code_c018i.o       code   0x00089a    program   0x000000
-         .romdata_c018i.o    romdata   0x00089a    program   0x000000
-         .idata_c018i.o_i    romdata   0x00089a    program   0x000000
-    .config_300001_main.o    romdata   0x300001    program   0x000001
-    .config_300003_main.o    romdata   0x300003    program   0x000001
-    .config_300006_main.o    romdata   0x300006    program   0x000001
+            .code_motor.o       code   0x000008    program   0x000828
+                     PROG       code   0x000830    program   0x0004aa
+               _cinit_scn       code   0x000cda    program   0x00009e
+                    .code       code   0x000d78    program   0x000020
+             _startup_scn       code   0x000d98    program   0x00001c
+           .code___init.o       code   0x000db4    program   0x000002
+        .romdata___init.o    romdata   0x000db6    program   0x000000
+        .idata___init.o_i    romdata   0x000db6    program   0x000000
+         .romdata_motor.o    romdata   0x000db6    program   0x000000
+         .idata_motor.o_i    romdata   0x000db6    program   0x000000
+            .code_c018i.o       code   0x000db6    program   0x000000
+         .romdata_c018i.o    romdata   0x000db6    program   0x000000
+         .idata_c018i.o_i    romdata   0x000db6    program   0x000000
+   .config_300001_motor.o    romdata   0x300001    program   0x000001
+   .config_300003_motor.o    romdata   0x300003    program   0x000001
+   .config_300006_motor.o    romdata   0x300006    program   0x000001
                 MATH_DATA      udata   0x000000       data   0x000014
-                 .tmpdata      udata   0x000014       data   0x000009
+                 .tmpdata      udata   0x000014       data   0x00000d
            .udata_c018i.o      udata   0x000060       data   0x00000a
            .idata_c018i.o      idata   0x00006a       data   0x000000
-            .udata_main.o      udata   0x00006a       data   0x000000
-            .idata_main.o      idata   0x00006a       data   0x000000
-        .udata_fxd0808u.o      udata   0x00006a       data   0x000000
-        .idata_fxd0808u.o      idata   0x00006a       data   0x000000
+           .udata_motor.o      udata   0x00006a       data   0x000000
+           .idata_motor.o      idata   0x00006a       data   0x000000
           .udata___init.o      udata   0x00006a       data   0x000000
           .idata___init.o      idata   0x00006a       data   0x000000
                    .stack      udata   0x000300       data   0x000100
@@ -43,41 +38,38 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000899      
+                            0x000000    0x000db5      
                             0x300001    0x300001      
                             0x300003    0x300003      
                             0x300006    0x300006      
-            2205 out of 33048 program addresses used, program memory utilization is 6%
+            3513 out of 33048 program addresses used, program memory utilization is 10%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   D0808S   0x00062a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                D0808SNEG   0x000638    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                 D0808SOK   0x000634    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                  D0808SX   0x00063e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                  DA0808S   0x000620    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                 FLO0832S   0x0004c8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
-                 FLO0832U   0x0004c4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
-                    FPA32   0x0004e8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                    FPS32   0x0004e6    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 FXD0808S   0x000614    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                 FXD0808U   0x00087c    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808u.c
-                  INT3208   0x000648    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                 __FpExit   0x0006a2    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-                 __FpPack   0x0006ce    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-            __FpReturnNaN   0x000696    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-         __FpReturnNegInf   0x0006a8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-        __FpReturnNegZero   0x0006c0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-         __FpReturnPosInf   0x0006ae    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-        __FpReturnPosZero   0x0006c8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-        __FpReturnSignInf   0x0006a4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-       __FpReturnSignZero   0x0006bc    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-              __FpReturnW   0x000726    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-              __FpUnPackA   0x000746    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-              __FpUnPackB   0x000776    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 FLO0832S   0x000834    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
+                 FLO0832U   0x000830    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
+                    FPA32   0x000854    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                    FPD32   0x000980    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                    FPM32   0x000a26    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+                    FPS32   0x000852    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                  TAGTB32   0x000b00    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\gtFP.asm
+                  TALTB32   0x000b12    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\ltFP.asm
+              __FpCompare   0x000b24    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                 __FpExit   0x000bda    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+                 __FpPack   0x000c06    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+            __FpReturnNaN   0x000bce    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+         __FpReturnNegInf   0x000be0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+        __FpReturnNegZero   0x000bf8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+         __FpReturnPosInf   0x000be6    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+        __FpReturnPosZero   0x000c00    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+        __FpReturnSignInf   0x000bdc    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+       __FpReturnSignZero   0x000bf4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+              __FpReturnW   0x000c5e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+              __FpUnPackA   0x000c7e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+              __FpUnPackB   0x000cae    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
           ___for_lbl00001   0x00002c    program     static                          
           ___for_lbl00002   0x000030    program     static                          
           ___for_lbl00003   0x000014    program     static                          
@@ -109,17 +101,16 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
           ___for_lbl00032   0x0001bc    program     static                          
           ___for_lbl00033   0x0001a0    program     static                          
        ___return_lbl00000   0x000040    program     static                          
-       ___return_lbl00000   0x000896    program     static                          
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00001   0x00087a    program     static                          
-       ___return_lbl00002   0x00083e    program     static                          
+       ___return_lbl00001   0x000db2    program     static                          
+       ___return_lbl00002   0x000d76    program     static                          
        ___return_lbl00004   0x0000a4    program     static                          
        ___return_lbl00011   0x00012a    program     static                          
        ___return_lbl00021   0x0001d2    program     static                          
-               __config_0   0x300001    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               __config_1   0x300003    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               __config_2   0x300006    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                   __init   0x000898    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
+               __config_0   0x300001    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               __config_1   0x300003    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               __config_2   0x300006    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                   __init   0x000db4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
               __tmplbl_10   0x000152    program     static                          
               __tmplbl_11   0x000172    program     static                          
               __tmplbl_12   0x000192    program     static                          
@@ -130,71 +121,82 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
                __tmplbl_7   0x0000cc    program     static                          
                __tmplbl_8   0x0000ec    program     static                          
                __tmplbl_9   0x00010c    program     static                          
-            __zero_memory   0x000840    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                _do_cinit   0x0007a2    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+            __zero_memory   0x000d78    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                _do_cinit   0x000cda    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                 _startup   0x000860    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                compare_l   0x000856    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                configADC   0x000254    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-           configLEDS_DIR   0x000266    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-          configureMotors   0x00026a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                copy_loop   0x000814    program     static                          
-            copy_one_byte   0x00081a    program     static                          
-              delay_100ms   0x0000ae    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               delay_10ms   0x00004a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                delay_1ms   0x000008    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                 delay_1s   0x000134    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                     done   0x00083e    program     static                          
-             done_copying   0x000828    program     static                          
-                  endloop   0x000892    program     static                          
-                 jANotInf   0x000510    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jANotNeg   0x0005a4    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-              jAandWsetup   0x000574    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jAltBexp   0x000562    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                jBANotInf   0x000506    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jBNotInf   0x00051e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-            jDifOrPosSign   0x000532    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                    jExit   0x000694    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-               jFinalSign   0x00060c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                jI2F08Beg   0x0004d2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
-                    jLoop   0x00067c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                jLoopExit   0x00068a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                     jMax   0x000658    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                  jMaxNeg   0x000662    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                  jMaxPos   0x00065c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-             jNotBothZero   0x000536    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                  jNotInf   0x00066c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                  jPkLoop   0x0006dc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-             jPkRoundDone   0x000726    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-               jPkRoundIt   0x00070e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-             jPkShiftDone   0x0006f8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-           jReturnPosInf0   0x0006b2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-               jShiftDone   0x0005cc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-               jShiftLoop   0x0005be    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                jSignDone   0x0005fc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                  jUnpkA1   0x000750    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkA2   0x000768    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jUnpkANZ   0x00075e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkB1   0x000780    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkB2   0x000798    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jUnpkBNZ   0x00078e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jUnpkNaN   0x000772    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jWNotNeg   0x0005b8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                    jZero   0x000668    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-               jZero1and2   0x0006b6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-                     loop   0x000884    program     static                          
-                     loop   0x000870    program     static                          
-                   loop_h   0x00084e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                   loop_l   0x000858    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                     main   0x000492    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-              readSensors   0x000278    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-              startMotor1   0x000426    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-              startMotor2   0x000458    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               stopMotor1   0x00048a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               stopMotor2   0x00048e    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                     test   0x0007bc    program     static                          
-              twoByteComp   0x0001dc    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               zero_block   0x00084e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                 _startup   0x000d98    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                compare_l   0x000d8e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                configADC   0x000254    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+           configLEDS_DIR   0x00025e    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+          configureMotors   0x000262    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                copy_loop   0x000d4c    program     static                          
+            copy_one_byte   0x000d52    program     static                          
+              delay_100ms   0x0000ae    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               delay_10ms   0x00004a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                delay_1ms   0x000008    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                 delay_1s   0x000134    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                     done   0x000d76    program     static                          
+             done_copying   0x000d60    program     static                          
+                 jANotInf   0x00087c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jANotInf   0x00099e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                 jANotInf   0x000a44    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+                 jANotNeg   0x000910    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                jANotZero   0x0009b2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+              jAandWsetup   0x0008e0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                  jAisNeg   0x000ba0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                 jAltBexp   0x0008ce    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                jBANotInf   0x000872    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jBNotInf   0x00088a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+              jBothFinite   0x000a52    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+             jBothNotZero   0x000b42    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+             jBothNotZero   0x000a5e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+            jDifOrPosSign   0x00089e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                      jEQ   0x000b5e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                    jExch   0x000b6a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                   jExpEQ   0x000bb0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                   jFinal   0x000b94    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+               jFinalSign   0x000978    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                jHaveZero   0x000a5a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+                jI2F08Beg   0x00083e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
+                    jLoop   0x0009da    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                      jNE   0x000b62    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                    jNext   0x000a00    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                jNoAdjust   0x0009fe    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                  jNoExch   0x000b8a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+             jNotBothZero   0x0008a2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                  jPkLoop   0x000c14    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+             jPkRoundDone   0x000c5e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+               jPkRoundIt   0x000c46    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+             jPkShiftDone   0x000c30    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+           jReturnPosInf0   0x000bea    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+                  jRotate   0x000bbc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                   jShift   0x000ba6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+               jShiftDone   0x000938    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+               jShiftLoop   0x00092a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                jSignDone   0x000968    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+              jSignedZero   0x0009a8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                 jSignsEQ   0x000b46    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                  jUnpkA1   0x000c88    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkA2   0x000ca0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jUnpkANZ   0x000c96    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkB1   0x000cb8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkB2   0x000cd0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jUnpkBNZ   0x000cc6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jUnpkNaN   0x000caa    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jWNotNeg   0x000924    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+               jZero1and2   0x000bee    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+                     loop   0x000da8    program     static                          
+                   loop_h   0x000d86    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                   loop_l   0x000d90    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                     main   0x00073a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+              readSensors   0x0002dc    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+              startMotor1   0x000270    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+              startMotor2   0x0002a2    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               stopMotor1   0x0002d4    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               stopMotor2   0x0002d8    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                     test   0x000cf4    program     static                          
+              twoByteComp   0x0001dc    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               zero_block   0x000d86    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                    ADCON0   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                ADCON0bits   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                    ADCON1   0x000fc1       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
@@ -331,7 +333,7 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
                     RCREG   0x000fae       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                     RCSTA   0x000fab       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                 RCSTAbits   0x000fab       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                     SIGN   0x000000       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
+                     SIGN   0x00000e       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
                     SPBRG   0x000faf       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                    SPBRGH   0x000fb0       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                    SPPCFG   0x000f63       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
@@ -446,32 +448,32 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
                    WDTCON   0x000fd1       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                WDTCONbits   0x000fd1       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
                      WREG   0x000fe8       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                 __AARGB0   0x000009       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB1   0x000008       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB2   0x000007       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB3   0x000006       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB4   0x000005       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB5   0x000004       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB6   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB7   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                   __AEXP   0x00000a       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __BARGB0   0x00000e       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                 __BARGB1   0x00000d       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                 __BARGB2   0x00000c       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                 __BARGB3   0x00000b       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                   __BEXP   0x00000f       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                __FPFLAGS   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-            __FPFLAGSbits   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-                  __REMB0   0x000005       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                  __REMB1   0x000004       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                  __REMB2   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                  __REMB3   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB0   0x000007       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB1   0x000006       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB2   0x000005       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB3   0x000004       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB4   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB5   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB6   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB7   0x000000       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                   __AEXP   0x000008       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __BARGB0   0x00000c       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB1   0x00000b       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB2   0x00000a       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB3   0x000009       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                   __BEXP   0x00000d       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                __FPFLAGS   0x00000f       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
+            __FPFLAGSbits   0x00000f       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
+                  __REMB0   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB1   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB2   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB3   0x000000       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
                    __TEMP   0x000013       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                  __TEMPB0   0x000013       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                  __TEMPB1   0x000012       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                  __TEMPB2   0x000011       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                  __TEMPB3   0x000010       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
-                  __tmp_0   0x000014       data     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
+                  __tmp_0   0x000014       data     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
                 curr_byte   0x000063       data     static E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                curr_entry   0x000065       data     static E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                  data_ptr   0x000067       data     static E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
@@ -484,13 +486,13 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
                 ---------  ---------  ---------  --------- ---------                
                    _entry   0x000000    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
        ___return_lbl00000   0x000004    program     static                          
-                delay_1ms   0x000008    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
+                delay_1ms   0x000008    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
           ___for_lbl00003   0x000014    program     static                          
                __tmplbl_4   0x000026    program     static                          
           ___for_lbl00001   0x00002c    program     static                          
           ___for_lbl00002   0x000030    program     static                          
        ___return_lbl00000   0x000040    program     static                          
-               delay_10ms   0x00004a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
+               delay_10ms   0x00004a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
           ___for_lbl00007   0x000056    program     static                          
                __tmplbl_5   0x000068    program     static                          
           ___for_lbl00005   0x000070    program     static                          
@@ -500,7 +502,7 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
           ___for_lbl00008   0x00008e    program     static                          
           ___for_lbl00009   0x000092    program     static                          
        ___return_lbl00004   0x0000a4    program     static                          
-              delay_100ms   0x0000ae    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
+              delay_100ms   0x0000ae    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
           ___for_lbl00014   0x0000ba    program     static                          
                __tmplbl_7   0x0000cc    program     static                          
           ___for_lbl00012   0x0000d4    program     static                          
@@ -514,7 +516,7 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
           ___for_lbl00018   0x000112    program     static                          
           ___for_lbl00019   0x000116    program     static                          
        ___return_lbl00011   0x00012a    program     static                          
-                 delay_1s   0x000134    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
+                 delay_1s   0x000134    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
           ___for_lbl00024   0x000140    program     static                          
               __tmplbl_10   0x000152    program     static                          
           ___for_lbl00022   0x00015a    program     static                          
@@ -532,124 +534,131 @@ Linker Map File - Created Fri Oct 10 22:29:29 2014
           ___for_lbl00031   0x0001b8    program     static                          
           ___for_lbl00032   0x0001bc    program     static                          
        ___return_lbl00021   0x0001d2    program     static                          
-              twoByteComp   0x0001dc    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                configADC   0x000254    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-           configLEDS_DIR   0x000266    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-          configureMotors   0x00026a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-              readSensors   0x000278    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-              startMotor1   0x000426    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-              startMotor2   0x000458    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               stopMotor1   0x00048a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               stopMotor2   0x00048e    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                     main   0x000492    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                 FLO0832U   0x0004c4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
-                 FLO0832S   0x0004c8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
-                jI2F08Beg   0x0004d2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
-                    FPS32   0x0004e6    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                    FPA32   0x0004e8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                jBANotInf   0x000506    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jANotInf   0x000510    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jBNotInf   0x00051e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-            jDifOrPosSign   0x000532    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-             jNotBothZero   0x000536    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jAltBexp   0x000562    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-              jAandWsetup   0x000574    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jANotNeg   0x0005a4    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 jWNotNeg   0x0005b8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-               jShiftLoop   0x0005be    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-               jShiftDone   0x0005cc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                jSignDone   0x0005fc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-               jFinalSign   0x00060c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
-                 FXD0808S   0x000614    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                  DA0808S   0x000620    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                   D0808S   0x00062a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                 D0808SOK   0x000634    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                D0808SNEG   0x000638    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                  D0808SX   0x00063e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808s.asm
-                  INT3208   0x000648    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                     jMax   0x000658    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                  jMaxPos   0x00065c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                  jMaxNeg   0x000662    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                    jZero   0x000668    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                  jNotInf   0x00066c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                    jLoop   0x00067c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                jLoopExit   0x00068a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-                    jExit   0x000694    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\castFP08.asm
-            __FpReturnNaN   0x000696    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-                 __FpExit   0x0006a2    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-        __FpReturnSignInf   0x0006a4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-         __FpReturnNegInf   0x0006a8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-         __FpReturnPosInf   0x0006ae    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-           jReturnPosInf0   0x0006b2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-               jZero1and2   0x0006b6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-       __FpReturnSignZero   0x0006bc    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-        __FpReturnNegZero   0x0006c0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-        __FpReturnPosZero   0x0006c8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-                 __FpPack   0x0006ce    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-                  jPkLoop   0x0006dc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-             jPkShiftDone   0x0006f8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-               jPkRoundIt   0x00070e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-             jPkRoundDone   0x000726    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-              __FpReturnW   0x000726    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
-              __FpUnPackA   0x000746    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkA1   0x000750    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jUnpkANZ   0x00075e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkA2   0x000768    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jUnpkNaN   0x000772    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-              __FpUnPackB   0x000776    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkB1   0x000780    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                 jUnpkBNZ   0x00078e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                  jUnpkB2   0x000798    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
-                _do_cinit   0x0007a2    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     test   0x0007bc    program     static                          
-                copy_loop   0x000814    program     static                          
-            copy_one_byte   0x00081a    program     static                          
-             done_copying   0x000828    program     static                          
-                     done   0x00083e    program     static                          
-       ___return_lbl00002   0x00083e    program     static                          
-            __zero_memory   0x000840    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                   loop_h   0x00084e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-               zero_block   0x00084e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                compare_l   0x000856    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                   loop_l   0x000858    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
-                 _startup   0x000860    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     loop   0x000870    program     static                          
-       ___return_lbl00001   0x00087a    program     static                          
-                 FXD0808U   0x00087c    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd0808u.c
-                     loop   0x000884    program     static                          
-                  endloop   0x000892    program     static                          
-       ___return_lbl00000   0x000896    program     static                          
-                   __init   0x000898    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
-               __config_0   0x300001    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               __config_1   0x300003    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-               __config_2   0x300006    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
-                     SIGN   0x000000       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-                __FPFLAGS   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-            __FPFLAGSbits   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-                  __REMB3   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB7   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB6   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                  __REMB2   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB5   0x000004       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                  __REMB1   0x000004       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB4   0x000005       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                  __REMB0   0x000005       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB3   0x000006       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB2   0x000007       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB1   0x000008       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __AARGB0   0x000009       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                   __AEXP   0x00000a       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
-                 __BARGB3   0x00000b       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                 __BARGB2   0x00000c       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                 __BARGB1   0x00000d       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                 __BARGB0   0x00000e       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
-                   __BEXP   0x00000f       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+              twoByteComp   0x0001dc    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                configADC   0x000254    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+           configLEDS_DIR   0x00025e    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+          configureMotors   0x000262    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+              startMotor1   0x000270    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+              startMotor2   0x0002a2    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               stopMotor1   0x0002d4    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               stopMotor2   0x0002d8    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+              readSensors   0x0002dc    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                     main   0x00073a    program     extern C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                 FLO0832U   0x000830    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
+                 FLO0832S   0x000834    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
+                jI2F08Beg   0x00083e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cast08FP.asm
+                    FPS32   0x000852    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                    FPA32   0x000854    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                jBANotInf   0x000872    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jANotInf   0x00087c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jBNotInf   0x00088a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+            jDifOrPosSign   0x00089e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+             jNotBothZero   0x0008a2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jAltBexp   0x0008ce    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+              jAandWsetup   0x0008e0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jANotNeg   0x000910    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                 jWNotNeg   0x000924    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+               jShiftLoop   0x00092a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+               jShiftDone   0x000938    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                jSignDone   0x000968    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+               jFinalSign   0x000978    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\addFP.asm
+                    FPD32   0x000980    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                 jANotInf   0x00099e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+              jSignedZero   0x0009a8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                jANotZero   0x0009b2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                    jLoop   0x0009da    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                jNoAdjust   0x0009fe    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                    jNext   0x000a00    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\divFP.asm
+                    FPM32   0x000a26    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+                 jANotInf   0x000a44    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+              jBothFinite   0x000a52    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+                jHaveZero   0x000a5a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+             jBothNotZero   0x000a5e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\mulFP.asm
+                  TAGTB32   0x000b00    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\gtFP.asm
+                  TALTB32   0x000b12    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\ltFP.asm
+              __FpCompare   0x000b24    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+             jBothNotZero   0x000b42    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                 jSignsEQ   0x000b46    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                      jEQ   0x000b5e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                      jNE   0x000b62    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                    jExch   0x000b6a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                  jNoExch   0x000b8a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                   jFinal   0x000b94    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                  jAisNeg   0x000ba0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                   jShift   0x000ba6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                   jExpEQ   0x000bb0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+                  jRotate   0x000bbc    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\compFP.asm
+            __FpReturnNaN   0x000bce    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+                 __FpExit   0x000bda    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+        __FpReturnSignInf   0x000bdc    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+         __FpReturnNegInf   0x000be0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+         __FpReturnPosInf   0x000be6    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+           jReturnPosInf0   0x000bea    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+               jZero1and2   0x000bee    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+       __FpReturnSignZero   0x000bf4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+        __FpReturnNegZero   0x000bf8    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+        __FpReturnPosZero   0x000c00    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+                 __FpPack   0x000c06    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+                  jPkLoop   0x000c14    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+             jPkShiftDone   0x000c30    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+               jPkRoundIt   0x000c46    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+              __FpReturnW   0x000c5e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+             jPkRoundDone   0x000c5e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\packFP.asm
+              __FpUnPackA   0x000c7e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkA1   0x000c88    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jUnpkANZ   0x000c96    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkA2   0x000ca0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jUnpkNaN   0x000caa    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+              __FpUnPackB   0x000cae    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkB1   0x000cb8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                 jUnpkBNZ   0x000cc6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                  jUnpkB2   0x000cd0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\UnpackFP.asm
+                _do_cinit   0x000cda    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     test   0x000cf4    program     static                          
+                copy_loop   0x000d4c    program     static                          
+            copy_one_byte   0x000d52    program     static                          
+             done_copying   0x000d60    program     static                          
+                     done   0x000d76    program     static                          
+       ___return_lbl00002   0x000d76    program     static                          
+            __zero_memory   0x000d78    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+               zero_block   0x000d86    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                   loop_h   0x000d86    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                compare_l   0x000d8e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                   loop_l   0x000d90    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4550.asm
+                 _startup   0x000d98    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     loop   0x000da8    program     static                          
+       ___return_lbl00001   0x000db2    program     static                          
+                   __init   0x000db4    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
+               __config_0   0x300001    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               __config_1   0x300003    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+               __config_2   0x300006    program     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
+                 __AARGB7   0x000000       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB3   0x000000       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB6   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB2   0x000001       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB5   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB1   0x000002       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB4   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB0   0x000003       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB3   0x000004       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB2   0x000005       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB1   0x000006       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB0   0x000007       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                   __AEXP   0x000008       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __BARGB3   0x000009       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB2   0x00000a       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB1   0x00000b       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB0   0x00000c       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                   __BEXP   0x00000d       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                     SIGN   0x00000e       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
+                __FPFLAGS   0x00000f       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
+            __FPFLAGSbits   0x00000f       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
                  __TEMPB3   0x000010       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                  __TEMPB2   0x000011       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                  __TEMPB1   0x000012       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
-                 __TEMPB0   0x000013       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
                    __TEMP   0x000013       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
-                  __tmp_0   0x000014       data     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\main.c
+                 __TEMPB0   0x000013       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\temparg.asm
+                  __tmp_0   0x000014       data     static C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c
                      prom   0x000060       data     static E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                 curr_byte   0x000063       data     static E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                curr_entry   0x000065       data     static E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c

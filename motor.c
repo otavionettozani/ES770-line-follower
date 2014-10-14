@@ -1,5 +1,6 @@
 #include <p18f4550.h>
 
+
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
@@ -23,6 +24,12 @@
 
 //------------------ CODE DEFINES --------------------------//
 
+#define SENSOR_IR0 PORTAbits.RA0
+#define SENSOR_IR1 PORTAbits.RA1
+#define SENSOR_IR2 PORTAbits.RA2
+#define SENSOR_IR3 PORTAbits.RA3
+#define SENSOR_IR4 PORTAbits.RA4
+#define SENSOR_IR5 PORTAbits.RA5
 #define SENSOR_INPUT TRISA
 #define WHITE_OFFSET_H 0x00
 #define WHITE_OFFSET_L 0xff
@@ -134,11 +141,15 @@ int twoByteComp(int i1H, int i1L, int i2H, int i2L){
 
 void configADC(){
 
-	SENSOR_INPUT = 0x3F;
+	ADCON1 = 0x0F;
+	
 
+	SENSOR_INPUT = 0x3F;
+/*
 	ADCON1 = 0x09;
 	ADCON0 = 0x01;
 	ADCON2 = 0b10001000;
+*/
 
 }
 
@@ -157,44 +168,6 @@ void configureMotors(){
 
 
 //----------------CORE FUNCTIONS -----------------------//
-
-/* retorno = [-3 , 3] a depender da posicao da linha */
-float readSensors(){
-	char activeLeds, activeLedsCounter;
-	char i;
-	char retorno;
-	
-	
-	for(i=0;i<6;i++){
-		ADCON0 = i<<2;
-		delay_10ms();
-		ADCON0 = ADCON0 | 1;
-		delay_10ms();
-		ADCON0 = ADCON0 | 2;
-		while(ADCON0 & 2);
-		if(twoByteComp(ADRESH, ADRESL, WHITE_OFFSET_H, WHITE_OFFSET_L)>0){
-			activeLeds = activeLeds | (1<<i);
-		}
-	}
-	
-	//posicao da linha a partir dos valors lidos
-	activeLedsCounter =0;
-	for(i=0; i<6; i++){
-		if(activeLeds&(1<<i)){
-			retorno += (2.5-i);
-			activeLedsCounter++;
-			
-		}
-	}
-
-	if(activeLedsCounter >=3){
-		LED1 = 1;
-	}else {
-		LED1 = 0;
-	}
-	
-	return retorno/activeLedsCounter;
-}
 
 
 void startMotor1(char direction){
@@ -223,11 +196,30 @@ void stopMotor2(){
 }
 
 
+/* retorno = [-2.5 , 2.5] a depender da posicao da linha */
+float readSensors(){
+	float retorno=0;
+	float activeSensors=0;	
+
+	retorno+= 5.*SENSOR_IR0;
+	retorno+= 3.*SENSOR_IR1;
+	retorno+= 1.*SENSOR_IR2;
+	retorno+= -1.*SENSOR_IR3;
+	retorno+= -3.*SENSOR_IR4;
+	retorno+= -5.*SENSOR_IR5;
+
+	activeSensors = SENSOR_IR0 + SENSOR_IR1 + SENSOR_IR2 + SENSOR_IR3 + SENSOR_IR4 + SENSOR_IR5; 
+
+	return retorno/activeSensors;
+}
+
+
 
 //------------------   MAIN    -------------------------//
 
 void main(void){
 	char a = 0x00;
+	float line;
 
 	configADC();
 	configLEDS_DIR();
@@ -237,7 +229,23 @@ void main(void){
 	startMotor2(BACKWARD);
 
 	while(1){
-		LED2 = 1;
+		line = readSensors();
+		if(line>0){
+			LED1 = 1;
+			LED2 = 0;
+			startMotor1(FOWARD);
+			startMotor2(BACKWARD);
+		}else if (line<0){
+			LED2 = 1;
+			LED1 = 0;
+			startMotor1(BACKWARD);
+			startMotor2(FOWARD);
+		}else{
+			LED1 = 0;
+			LED2 = 0;
+			stopMotor1();
+			stopMotor2();
+		}
 	}
 
 
