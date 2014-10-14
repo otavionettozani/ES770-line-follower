@@ -1,13 +1,13 @@
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 77 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 92 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 93 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 110 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 111 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 112 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 224 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 225 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 227 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 232 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 246 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 247 : call of function without prototype
-Warning[2052] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 252 : unexpected return value
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 83 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 98 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 99 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 116 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 117 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 118 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 235 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 236 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 238 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 243 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 251 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 252 : call of function without prototype
+Warning[2052] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\motor.c 260 : unexpected return value

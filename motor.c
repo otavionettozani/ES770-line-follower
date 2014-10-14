@@ -55,6 +55,12 @@
 #define MOTOR2_B_DIR TRISBbits.RB7
 
 
+#define ENCODER1 PORTBbits.RB1
+#define ENCODER1_dir TRISBbits.RB1
+
+#define ENCODER2 PORTBbits.RB2
+#define ENCODER2_dir TRISBbits.RB2
+
 
 //------------------ WAIT FUNCTIONS -----------------------//
 
@@ -138,6 +144,11 @@ int twoByteComp(int i1H, int i1L, int i2H, int i2L){
 
 
 //----------------CONFIG FUNCTIONS ---------------------//
+
+void configEncoders(){
+	ENCODER1_dir = 1;
+	ENCODER2_dir = 1;
+}
 
 void configADC(){
 
@@ -231,21 +242,18 @@ void main(void){
 	while(1){
 		line = readSensors();
 		if(line>0){
-			LED1 = 1;
-			LED2 = 0;
 			startMotor1(FOWARD);
 			startMotor2(BACKWARD);
 		}else if (line<0){
-			LED2 = 1;
-			LED1 = 0;
 			startMotor1(BACKWARD);
 			startMotor2(FOWARD);
 		}else{
-			LED1 = 0;
-			LED2 = 0;
 			stopMotor1();
 			stopMotor2();
 		}
+
+		LED1 = ENCODER1;
+		LED2 = ENCODER2;
 	}
 
 
