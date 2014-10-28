@@ -1,13 +1,17 @@
 #include <p18f4550.h>
 #include <adc.h>
+#include <pwm.h>
+#include <timers.h>
 
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
 //------------------ MOTOR CONSTANTS -----------------------//
 
-#define FOWARD 1
+#define FORWARD 1
 #define BACKWARD 0
+#define MIN_MOTOR_ON 0b1011110000
+#define MAX_MOTOR_ON 0b1111111111
 //------------------ PID CONSTANTS --------------------------//
 
 #define MOTOR1_KP 1
@@ -39,10 +43,6 @@
 #define LED_IR_ENABLE LATD
 #define LED_IR_DIR TRISD
 
-#define MOTOR1_ENABLE PORTCbits.RC1
-#define MOTOR1_ENABLE_DIR TRISCbits.RC1
-#define MOTOR2_ENABLE PORTCbits.RC2
-#define MOTOR2_ENABLE_DIR TRISCbits.RC2
 
 #define MOTOR1_A PORTBbits.RB4
 #define MOTOR1_A_DIR TRISBbits.RB4
@@ -54,6 +54,8 @@
 #define MOTOR2_B PORTBbits.RB7
 #define MOTOR2_B_DIR TRISBbits.RB7
 
+#define MOTOR1_ENABLE_DIR TRISCbits.RC1
+#define MOTOR2_ENABLE_DIR TRISCbits.RC2
 
 #define ENCODER1 PORTBbits.RB1
 #define ENCODER1_dir TRISBbits.RB1
@@ -164,41 +166,56 @@ void configLEDS_DIR(){
 }
 
 void configureMotors(){
-	MOTOR1_ENABLE_DIR = 0;
-	MOTOR2_ENABLE_DIR = 0;
 	MOTOR1_A_DIR = 0;
 	MOTOR1_B_DIR = 0;
 	MOTOR2_A_DIR = 0;
 	MOTOR2_B_DIR = 0;
+
+	MOTOR1_ENABLE_DIR = 0;
+	MOTOR2_ENABLE_DIR = 0;
+
+	OpenPWM2(0xF9);
+	OpenPWM1(0xF9);
+}
+
+void configPWMTimer(){
+	OpenTimer2(TIMER_INT_OFF & T2_PS_1_16);
 }
 
 
 //----------------CORE FUNCTIONS -----------------------//
 
 
-void startMotor1(char direction){
-	MOTOR1_ENABLE = 1;
+void startMotor1(char direction, int percentageVelocity){
+	int dutycycle;
+
+	dutycycle = ((MAX_MOTOR_ON-MIN_MOTOR_ON)*percentageVelocity)/100 + MIN_MOTOR_ON;
 
 	MOTOR1_A = direction;
 	MOTOR1_B = !direction;
 
+	SetDCPWM2(dutycycle);
 
 }
 
-void startMotor2(char direction){
-	MOTOR2_ENABLE = 1;
+void startMotor2(char direction , int percentageVelocity){
+	int dutycycle;
 
-	MOTOR2_A = direction;
-	MOTOR2_B = !direction;
+	dutycycle = ((MAX_MOTOR_ON-MIN_MOTOR_ON)*percentageVelocity)/100 + MIN_MOTOR_ON;
+
+	MOTOR2_A = !direction;
+	MOTOR2_B = direction;
+
+	SetDCPWM1(dutycycle);
 
 } 
 
 
 void stopMotor1(){
-	MOTOR1_ENABLE = 0;
+	SetDCPWM2(0);
 }
 void stopMotor2(){
-	MOTOR2_ENABLE = 0;
+	SetDCPWM1(0);
 }
 
 
@@ -323,23 +340,29 @@ float readSensors(int comparador){
 void main(void){
 	float line;
 	int lineOffset;
+	unsigned int percentageVelocity1, percentageVelocity2;
+
+
 	configADC();
 	configLEDS_DIR();
-	
+	configureMotors();
+
 	lineOffset = calibrateSensors();
 	while(1){
 		line = readSensors(0x7F);
-
-		if(line>0.5){
-			LED1 = 1;
-			LED2 = 0;
-		}else if(line<=0.5 && line >=-0.5){
-			LED1 = 0;
-			LED2 = 0;
-		}else if(line < -0.5){
-			LED1 = 0;
-			LED2 = 1;
+		
+		if(line<0.5){
+			percentageVelocity1 = 25;
+			percentageVelocity2 = 0;
+		}else if(line>0.5){
+			percentageVelocity1 = 0;
+			percentageVelocity2 = 25;
 		}
+
+
+
+		startMotor1(FORWARD, percentageVelocity1);
+		startMotor2(FORWARD, percentageVelocity2);
 	}
 
 
