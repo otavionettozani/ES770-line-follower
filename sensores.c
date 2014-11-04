@@ -201,10 +201,13 @@ void stopMotor2(){
 	MOTOR2_ENABLE = 0;
 }
 
+unsigned int max;
+unsigned int min;
 
 int calibrateSensors(){
-	unsigned int max;
-	unsigned int min;	
+	int a = ReadADC();	
+
+	LED_IR_ENABLE = 0xff;	
 
 	SetChanADC(ADC_CH5);
 	ConvertADC();
@@ -250,6 +253,8 @@ int calibrateSensors(){
 		max = ReadADC();
 	if(ReadADC()<min)
 		min = ReadADC();
+	
+	LED_IR_ENABLE = 0x0;
 
 	return (max+min)/2;
 
@@ -312,7 +317,9 @@ float readSensors(int comparador){
 		activeSensors++;
 	}
 	
-	return retorno/activeSensors;
+	//activeSensors = 6- activeSensors;
+
+	return activeSensors? retorno/activeSensors : 0;
 	
 }
 
@@ -324,19 +331,21 @@ void main(void){
 	float line;
 	int lineOffset;
 	configADC();
+	delay_10ms();
 	configLEDS_DIR();
-	
+	delay_10ms();
+
 	lineOffset = calibrateSensors();
 	while(1){
 		line = readSensors(0x7F);
 
-		if(line>0.5){
+		if(line>1.0){
 			LED1 = 1;
 			LED2 = 0;
-		}else if(line<=0.5 && line >=-0.5){
+		}else if(line<=1.0 && line >=-1.0){
 			LED1 = 0;
 			LED2 = 0;
-		}else if(line < -0.5){
+		}else if(line < -1.0){
 			LED1 = 0;
 			LED2 = 1;
 		}
