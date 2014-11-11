@@ -93,54 +93,9 @@ void delay_10ms(){
 	Nop();
 }
 
-void delay_100ms(){
-	char i;
-	for(i=0; i<9; i++) delay_10ms();
-	for(i=0; i<9; i++) delay_1ms();
-	for(i=0; i<49; i++);
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-}
-
-
-void delay_1s(){
-	char i;
-	for(i=0; i<9; i++) delay_100ms();
-	for(i=0; i<9; i++) delay_10ms();
-	for(i=0; i<9; i++) delay_1ms();
-	for(i=0; i<39; i++);
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-	Nop();
-}
-
 
 
 //----------------- MATH FUNCTIONS ------------------------//
-
-/* retorno>0 <=> i1>i2 --- retorno<0 <=> i1<i2 --- retorno=0 <=> i1=i2 */
-int twoByteComp(int i1H, int i1L, int i2H, int i2L){
-	if(i1H!=i2H){
-		return i1H-i2H;
-	}
-	return i1L-i2L;
-}
 
 
 //----------------CONFIG FUNCTIONS ---------------------//
@@ -201,125 +156,89 @@ void stopMotor2(){
 	MOTOR2_ENABLE = 0;
 }
 
-unsigned int max;
-unsigned int min;
-
-int calibrateSensors(){
-	int a = ReadADC();	
-
-	LED_IR_ENABLE = 0xff;	
-
-	SetChanADC(ADC_CH5);
-	ConvertADC();
-	while(BusyADC());
-	max = min = ReadADC();
-
-	SetChanADC(ADC_CH4);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH3);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH2);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH1);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH0);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-	
-	LED_IR_ENABLE = 0x0;
-
-	return (max+min)/2;
-
-}
 
 /* retorno = [-2.5 , 2.5] a depender da posicao da linha */
-float readSensors(int comparador){
+float readSensors(){
 	float retorno=0;
-	float activeSensors=0;	
-	
+	float leituras[6];
+	float eixo[6] = {-1./2.5, -1./1.5, -1./0.5, 1./0.5, 1./1.5, 1./2.5};	
+	int i;
+	unsigned int adc_leitura;
+	float a,b,c, mc, mb, ma;
+	float pontoMinimo = 0, minimo = 10000;
+
+
 	SetChanADC(ADC_CH5);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += -2.5;
-		activeSensors++;
-	}
+	adc_leitura = ReadADC();
+	leituras[0] = ((float)adc_leitura - 18944.)*10./44224.;
 
 	SetChanADC(ADC_CH4);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += -1.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[1] = ((float)adc_leitura - 14272.)*10./48896.;
 	
 	SetChanADC(ADC_CH3);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += -0.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[2] = ((float)adc_leitura - 15424.)*10./47808.;
 
 	SetChanADC(ADC_CH2);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += 0.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[3] = ((float)adc_leitura - 13376.)*10./49856.;
 
 	SetChanADC(ADC_CH1);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += 1.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[4] = ((float)adc_leitura - 8192.)*10./54656.;
 
 	SetChanADC(ADC_CH0);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += 2.5;
-		activeSensors++;
-	}
-	
-	//activeSensors = 6- activeSensors;
+	adc_leitura = ReadADC();
+	leituras[5] = ((float)adc_leitura - 5632.)*10./47936.;
 
-	return activeSensors? retorno/activeSensors : 0;
+
+	for(i=0; i<4;i++){
+		c = leituras[i+2]*eixo[i+2]*eixo[i+2]/(eixo[i+2] - eixo[i]);
+		c -=leituras[i]*eixo[i]*eixo[i]/(eixo[i+2] - eixo[i]);
+		c -=leituras[i+1]*eixo[i+1]*eixo[i+1]/(eixo[i+1] - eixo[i]);
+		c +=leituras[i]*eixo[i]*eixo[i]/(eixo[i+1] - eixo[i]);
+		mc = eixo[i+2]*eixo[i+2]/(eixo[i+2] - eixo[i]);
+		mc -= eixo[i]*eixo[i]/(eixo[i+2] - eixo[i]);
+		mc -= eixo[i+1]*eixo[i+1]/(eixo[i+1] - eixo[i]);
+		mc += eixo[i]*eixo[i]/(eixo[i+1] - eixo[i]);
+		c = c/mc;
+
+		b = leituras[i+1]*eixo[i+1]*eixo[i+1]/(eixo[i+1] - eixo[i]);
+		b -=leituras[i]*eixo[i]*eixo[i]/(eixo[i+1] - eixo[i]);
+		mb = eixo[i+1]*eixo[i+1]/(eixo[i+1] - eixo[i]);
+		mb -= eixo[i]*eixo[i]/(eixo[i+1] - eixo[i]);
+		b -=c*mb;
+
+		a = leituras[i]*eixo[i]*eixo[i] - b*eixo[i] - c*eixo[i]*eixo[i];
+
+		if(a<0)
+			continue;
+
+		pontoMinimo = -b/(2.*a);
+
+		if(pontoMinimo > 1./eixo[i] && pontoMinimo < 1./eixo[i+2]){
+			if(minimo > a*pontoMinimo*pontoMinimo + b*pontoMinimo + c){
+				minimo = a*pontoMinimo*pontoMinimo + b*pontoMinimo + c;
+				retorno = pontoMinimo;
+			}
+		}
+
+	}
+
+	return retorno;
 	
 }
 
@@ -335,9 +254,8 @@ void main(void){
 	configLEDS_DIR();
 	delay_10ms();
 
-	lineOffset = calibrateSensors();
 	while(1){
-		line = readSensors(0x7F);
+		line = readSensors();
 
 		if(line>1.0){
 			LED1 = 1;
