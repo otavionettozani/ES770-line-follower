@@ -1,13 +1,17 @@
 #include <p18f4550.h>
 #include <adc.h>
+#include <pwm.h>
+#include <timers.h>
 
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
 //------------------ MOTOR CONSTANTS -----------------------//
 
-#define FOWARD 1
+#define FORWARD 1
 #define BACKWARD 0
+#define MIN_MOTOR_ON 0b1011110000
+#define MAX_MOTOR_ON 0b1111111111
 //------------------ PID CONSTANTS --------------------------//
 
 #define MOTOR1_KP 1
@@ -39,10 +43,6 @@
 #define LED_IR_ENABLE LATD
 #define LED_IR_DIR TRISD
 
-#define MOTOR1_ENABLE PORTCbits.RC1
-#define MOTOR1_ENABLE_DIR TRISCbits.RC1
-#define MOTOR2_ENABLE PORTCbits.RC2
-#define MOTOR2_ENABLE_DIR TRISCbits.RC2
 
 #define MOTOR1_A PORTBbits.RB4
 #define MOTOR1_A_DIR TRISBbits.RB4
@@ -54,6 +54,8 @@
 #define MOTOR2_B PORTBbits.RB7
 #define MOTOR2_B_DIR TRISBbits.RB7
 
+#define MOTOR1_ENABLE_DIR TRISCbits.RC1
+#define MOTOR2_ENABLE_DIR TRISCbits.RC2
 
 #define ENCODER1 PORTBbits.RB1
 #define ENCODER1_dir TRISBbits.RB1
@@ -93,9 +95,54 @@ void delay_10ms(){
 	Nop();
 }
 
+void delay_100ms(){
+	char i;
+	for(i=0; i<9; i++) delay_10ms();
+	for(i=0; i<9; i++) delay_1ms();
+	for(i=0; i<49; i++);
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+}
+
+
+void delay_1s(){
+	char i;
+	for(i=0; i<9; i++) delay_100ms();
+	for(i=0; i<9; i++) delay_10ms();
+	for(i=0; i<9; i++) delay_1ms();
+	for(i=0; i<39; i++);
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+	Nop();
+}
+
 
 
 //----------------- MATH FUNCTIONS ------------------------//
+
+/* retorno>0 <=> i1>i2 --- retorno<0 <=> i1<i2 --- retorno=0 <=> i1=i2 */
+int twoByteComp(int i1H, int i1L, int i2H, int i2L){
+	if(i1H!=i2H){
+		return i1H-i2H;
+	}
+	return i1L-i2L;
+}
 
 
 //----------------CONFIG FUNCTIONS ---------------------//
@@ -106,12 +153,8 @@ void configEncoders(){
 }
 
 void configADC(){
-
 	ADCON1 = 0x0F;
-	
-
 	OpenADC(ADC_FOSC_2 & ADC_LEFT_JUST & ADC_20_TAD, ADC_CH0 & ADC_INT_OFF & ADC_VREFPLUS_VDD & ADC_VREFMINUS_VSS, 8);
-
 }
 
 void configLEDS_DIR(){
@@ -119,47 +162,72 @@ void configLEDS_DIR(){
 }
 
 void configureMotors(){
-	MOTOR1_ENABLE_DIR = 0;
-	MOTOR2_ENABLE_DIR = 0;
 	MOTOR1_A_DIR = 0;
 	MOTOR1_B_DIR = 0;
 	MOTOR2_A_DIR = 0;
 	MOTOR2_B_DIR = 0;
+
+	MOTOR1_ENABLE_DIR = 0;
+	MOTOR2_ENABLE_DIR = 0;
+
+	OpenPWM2(0xF9);
+	OpenPWM1(0xF9);
 }
+
+void configPWMTimer(){
+	OpenTimer2(TIMER_INT_OFF & T2_PS_1_16);
+}
+
+void configInterruptionTimer(){
+	OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_32);
+	//aprox 0.8s
+}
+
+void resetInterruptionTimer(){
+	WriteTimer0(0);
+	INTCONbits.TMR0IF = 0;
+}
+
 
 
 //----------------CORE FUNCTIONS -----------------------//
 
 
-void startMotor1(char direction){
-	MOTOR1_ENABLE = 1;
+void startMotor1(char direction, int percentageVelocity){
+	int dutycycle;
+
+	dutycycle = ((MAX_MOTOR_ON-MIN_MOTOR_ON)*percentageVelocity)/100 + MIN_MOTOR_ON;
 
 	MOTOR1_A = direction;
 	MOTOR1_B = !direction;
 
+	SetDCPWM2(dutycycle);
 
 }
 
-void startMotor2(char direction){
-	MOTOR2_ENABLE = 1;
+void startMotor2(char direction , int percentageVelocity){
+	int dutycycle;
 
-	MOTOR2_A = direction;
-	MOTOR2_B = !direction;
+	dutycycle = ((MAX_MOTOR_ON-MIN_MOTOR_ON)*percentageVelocity)/100 + MIN_MOTOR_ON;
+
+	MOTOR2_A = !direction;
+	MOTOR2_B = direction;
+
+	SetDCPWM1(dutycycle);
 
 } 
 
 
 void stopMotor1(){
-	MOTOR1_ENABLE = 0;
+	SetDCPWM2(0);
 }
 void stopMotor2(){
-	MOTOR2_ENABLE = 0;
+	SetDCPWM1(0);
 }
 
 
 /* retorno = [-2.5 , 2.5] a depender da posicao da linha */
 float readSensors(){
-	float retorno=0;
 	float leituras[6];
 	float eixo[6] = {-2.5, -1.5, -0.5, 0.5, 1.5, 2.5};	
 	int i;
@@ -204,9 +272,6 @@ float readSensors(){
 	adc_leitura = ReadADC();
 	leituras[5] = ((float)adc_leitura - 5632.)*10./47936.;
 
-
-
-	
 	//splines
 	i=0;
 	det = eixo[i]*eixo[i]*eixo[i+1];
@@ -283,30 +348,101 @@ float readSensors(){
 }
 
 
+unsigned int pulse1Count=0, pulse2Count=0;
+unsigned char lastSensor1=0, lastSensor2=0;
+void readEncoders(){
+	if(ENCODER1 == 1 && ENCODER1 != lastSensor1){
+		pulse1Count ++;
+	}
+	if(ENCODER2 == 1 && ENCODER2 != lastSensor2){
+		pulse2Count ++;
+	}
+
+	lastSensor1 = ENCODER1;
+	lastSensor2 = ENCODER2;
+
+}
+
+
+//------------------  INTERRUPTION ---------------------//
+
+
+float currentVelocity1=0, currentVelocity2=0;
+
+void timer_interrupt(void);
+void velocityCalculation(void);
+
+#pragma code low_vector = 0x08
+void low_interrupt(void){
+	_asm GOTO timer_interrupt _endasm
+}
+
+#pragma code
+#pragma interruptlow timer_interrupt
+
+void timer_interrupt(void){
+
+	velocityCalculation();
+	resetInterruptionTimer();
+}
+
+
+void velocityCalculation(){
+		currentVelocity1 = pulse1Count/0.8;
+		pulse1Count = 0;
+		currentVelocity2 = pulse2Count/0.8;
+		pulse2Count = 0;
+}
 
 //------------------   MAIN    -------------------------//
 
 void main(void){
 	float line;
-	int lineOffset;
+	unsigned int percentageVelocity1, percentageVelocity2;
+	unsigned char lastRead1, lastRead2;
+
 	configADC();
 	delay_10ms();
 	configLEDS_DIR();
 	delay_10ms();
+	configureMotors();
+	delay_10ms();
+
+	configInterruptionTimer();
+	delay_10ms();
+	resetInterruptionTimer();
+	delay_10ms();
+
+
+	INTCONbits.GIE = 1;
+	INTCONbits.TMR0IF = 0;
+	INTCONbits.TMR0IE = 1;
+	delay_10ms();
+
 
 	while(1){
-		line = readSensors();
 
-		if(line>1.0){
-			LED1 = 1;
-			LED2 = 0;
-		}else if(line<=1.0 && line >=-1.0){
-			LED1 = 0;
-			LED2 = 0;
-		}else if(line < -1.0){
-			LED1 = 0;
-			LED2 = 1;
+		readEncoders();
+		line = readSensors();
+		readEncoders();
+
+		if(line<-1.0){
+			percentageVelocity1 = 25;
+			percentageVelocity2 = 0;
+		}else if(line>1.0){
+			percentageVelocity1 = 0;
+			percentageVelocity2 = 25;
+		}else{
+			percentageVelocity1 = 100;
+			percentageVelocity2 = 100;
 		}
+		readEncoders();
+
+		startMotor1(FORWARD, 100);
+
+		readEncoders();
+
+		startMotor2(FORWARD, percentageVelocity2);
 	}
 
 

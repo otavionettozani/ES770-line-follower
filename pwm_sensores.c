@@ -219,117 +219,124 @@ void stopMotor2(){
 }
 
 
-int calibrateSensors(){
-	unsigned int max;
-	unsigned int min;	
-
-	SetChanADC(ADC_CH5);
-	ConvertADC();
-	while(BusyADC());
-	max = min = ReadADC();
-
-	SetChanADC(ADC_CH4);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH3);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH2);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH1);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	SetChanADC(ADC_CH0);
-	ConvertADC();
-	while(BusyADC());
-	if(ReadADC()>max)
-		max = ReadADC();
-	if(ReadADC()<min)
-		min = ReadADC();
-
-	return (max+min)/2;
-
-}
-
 /* retorno = [-2.5 , 2.5] a depender da posicao da linha */
-float readSensors(int comparador){
-	float retorno=0;
-	float activeSensors=0;	
-	
+float readSensors(){
+	float leituras[6];
+	float eixo[6] = {-2.5, -1.5, -0.5, 0.5, 1.5, 2.5};	
+	int i;
+	unsigned int adc_leitura;
+	float a,b,c, derv, det;
+	float pontoMinimo = 0, minimo = 10000, testeMinimo1, testeMinimo2;
+
+
 	SetChanADC(ADC_CH5);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += -2.5;
-		activeSensors++;
-	}
+	adc_leitura = ReadADC();
+	leituras[0] = ((float)adc_leitura - 18944.)*10./44224.;
 
 	SetChanADC(ADC_CH4);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += -1.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[1] = ((float)adc_leitura - 14272.)*10./48896.;
 	
 	SetChanADC(ADC_CH3);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += -0.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[2] = ((float)adc_leitura - 15424.)*10./47808.;
 
 	SetChanADC(ADC_CH2);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += 0.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[3] = ((float)adc_leitura - 13376.)*10./49856.;
 
 	SetChanADC(ADC_CH1);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += 1.5;
-		activeSensors++;
-	}
-
+	adc_leitura = ReadADC();
+	leituras[4] = ((float)adc_leitura - 8192.)*10./54656.;
 
 	SetChanADC(ADC_CH0);
 	ConvertADC();
 	while(BusyADC());
-	if(ReadADC()>comparador){
-		retorno += 2.5;
-		activeSensors++;
-	}
+	adc_leitura = ReadADC();
+	leituras[5] = ((float)adc_leitura - 5632.)*10./47936.;
+
+	//splines
+	i=0;
+	det = eixo[i]*eixo[i]*eixo[i+1];
+	det = det - eixo[i]*eixo[i]*eixo[i+2];
+	det = det - eixo[i]*eixo[i+1]*eixo[i+1];
+	det = det + eixo[i]*eixo[i+2]*eixo[i+2];
+	det = det + eixo[i+1]*eixo[i+1]*eixo[i+2];
+	det = det - eixo[i+1]*eixo[i+2]*eixo[i+2];
+
+
+	a = leituras[i]*(eixo[i+1]-eixo[i+2]);
+	a = a - leituras[i+1]*(eixo[i]-eixo[i+2]);
+	a = a + leituras[i+2]*(eixo[i]-eixo[i+1]);
+	a = a/det;
+
+	b = leituras[i+1]*(eixo[i]*eixo[i]-eixo[i+2]*eixo[i+2]);
+	b = b - leituras[i]*(eixo[i+1]*eixo[i+1]-eixo[i+2]*eixo[i+2]);
+	b = b - leituras[i+2]*(eixo[i]*eixo[i]-eixo[i+1]*eixo[i+1]);
+	b = b/det;
+
+	c = eixo[i]*eixo[i+1]*leituras[i+2]*(eixo[i]-eixo[i+1]);
+	c = c - eixo[i]*eixo[i+2]*leituras[i+1]*(eixo[i]-eixo[i+2]);
+	c = c + eixo[i+1]*eixo[i+2]*leituras[i]*(eixo[i+1]-eixo[i+2]);
+	c = c/det;
+
 	
-	return retorno/activeSensors;
+
+	if(-b/(2*a)>=eixo[0] && -b/(2*a)<=eixo[2]){
+		pontoMinimo = -b/(2*a);
+		minimo = a*pontoMinimo*pontoMinimo+b*pontoMinimo+c;
+	}else{
+		testeMinimo1 = a*eixo[0]*eixo[0]+b*eixo[0]+c;
+		testeMinimo2 = a*eixo[2]*eixo[2]+b*eixo[2]+c;
+		minimo = testeMinimo1<testeMinimo2?testeMinimo1:testeMinimo2;
+		pontoMinimo = testeMinimo1<testeMinimo2?eixo[0]:eixo[2];
+	}
+
+	for(i=2; i<5; i++){
+		derv = 2*a*eixo[i]+b;
+
+		det = eixo[i]*eixo[i]-2*eixo[i]*eixo[i+1]+eixo[i+1]*eixo[i+1];
+
+		a = leituras[i+1]-leituras[i]+derv*(eixo[i]-eixo[i+1]);
+		a = a/det;
+
+		b = 2*eixo[i]*leituras[i];
+		b = b - derv*(eixo[i]*eixo[i]-eixo[i+1]*eixo[i+1]);
+		b = b - 2*eixo[i]*leituras[i+1];
+		b = b/det;
+
+		c = eixo[i]*eixo[i]*leituras[i+1];
+		c = c - leituras[i]*(2*eixo[i]*eixo[i+1] - eixo[i+1]*eixo[i+1]);
+		c = c + derv*eixo[i]*eixo[i+1]*(eixo[i]-eixo[i+1]);
+		c = c/det;
+
+		testeMinimo1 = a*(-b/(2*a))*(-b/(2*a))+b*(-b/(2*a))+c;
+		if(-b/(2*a)>=eixo[i] && -b/(2*a)<=eixo[i+1] && minimo>testeMinimo1 ){
+			pontoMinimo = -b/(2*a);
+			minimo = a*pontoMinimo*pontoMinimo+b*pontoMinimo+c;
+		}else{
+			testeMinimo1 = a*eixo[i]*eixo[i]+b*eixo[i]+c;
+			testeMinimo2 = a*eixo[i+1]*eixo[i+1]+b*eixo[i+1]+c;
+			if(minimo>testeMinimo1 || minimo>testeMinimo2){
+				minimo = testeMinimo1<testeMinimo2?testeMinimo1:testeMinimo2;
+				pontoMinimo = testeMinimo1<testeMinimo2?eixo[i]:eixo[i+1];
+			}
+		}
+
+	}
+
+
+	return pontoMinimo;
 	
 }
 
@@ -344,19 +351,24 @@ void main(void){
 
 
 	configADC();
+	delay_10ms();
 	configLEDS_DIR();
+	delay_10ms();
 	configureMotors();
+	delay_10ms();
 
-	lineOffset = calibrateSensors();
 	while(1){
-		line = readSensors(0x7F);
+		line = readSensors();
 		
-		if(line<0.5){
+		if(line<-1.0){
 			percentageVelocity1 = 25;
 			percentageVelocity2 = 0;
-		}else if(line>0.5){
+		}else if(line>1.0){
 			percentageVelocity1 = 0;
 			percentageVelocity2 = 25;
+		}else{
+			percentageVelocity1 = 100;
+			percentageVelocity2 = 100;
 		}
 
 
