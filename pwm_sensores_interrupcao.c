@@ -14,8 +14,8 @@
 #define MAX_MOTOR_ON 0b1111111111
 //------------------ PID CONSTANTS --------------------------//
 
-#define MOTOR1_KP 1
-#define MOTOR1_KI 0
+#define MOTOR1_KP 8.55
+#define MOTOR1_KI 0.16
 #define MOTOR1_KD 0
 
 #define MOTOR2_KP 1
@@ -25,6 +25,7 @@
 #define SYSTEM_KP 1
 #define SYSTEM_KI 0
 #define SYSTEM_KD 0
+#define PERCENTAGE_MAX_VELOCITY 0.5
 
 //------------------ CODE DEFINES --------------------------//
 
@@ -179,7 +180,7 @@ void configPWMTimer(){
 }
 
 void configInterruptionTimer(){
-	OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_32);
+	OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
 	//aprox 0.8s
 }
 
@@ -196,7 +197,9 @@ void resetInterruptionTimer(){
 void startMotor1(char direction, int percentageVelocity){
 	int dutycycle;
 
+	percentageVelocity = percentageVelocity*PERCENTAGE_MAX_VELOCITY;
 	dutycycle = ((MAX_MOTOR_ON-MIN_MOTOR_ON)*percentageVelocity)/100 + MIN_MOTOR_ON;
+	
 
 	MOTOR1_A = direction;
 	MOTOR1_B = !direction;
@@ -208,7 +211,9 @@ void startMotor1(char direction, int percentageVelocity){
 void startMotor2(char direction , int percentageVelocity){
 	int dutycycle;
 
+	percentageVelocity = percentageVelocity*PERCENTAGE_MAX_VELOCITY;
 	dutycycle = ((MAX_MOTOR_ON-MIN_MOTOR_ON)*percentageVelocity)/100 + MIN_MOTOR_ON;
+
 
 	MOTOR2_A = !direction;
 	MOTOR2_B = direction;
@@ -366,7 +371,7 @@ void readEncoders(){
 
 //------------------  INTERRUPTION ---------------------//
 
-
+/*
 float currentVelocity1=0, currentVelocity2=0;
 
 void timer_interrupt(void);
@@ -393,13 +398,16 @@ void velocityCalculation(){
 		currentVelocity2 = pulse2Count/0.8;
 		pulse2Count = 0;
 }
-
+*/
 //------------------   MAIN    -------------------------//
 
 void main(void){
 	float line;
-	unsigned int percentageVelocity1, percentageVelocity2;
+	int percentageVelocity1, percentageVelocity2;
 	unsigned char lastRead1, lastRead2;
+//	float velocityReference1 = 10, velocity1Integrate =0;
+//	float errorMotorVelocity;
+	float PID, integrative, lastValue, derivative;
 
 	configADC();
 	delay_10ms();
@@ -419,30 +427,30 @@ void main(void){
 	INTCONbits.TMR0IE = 1;
 	delay_10ms();
 
+	lastValue = 0;
 
 	while(1){
 
-		readEncoders();
 		line = readSensors();
-		readEncoders();
 
-		if(line<-1.0){
-			percentageVelocity1 = 25;
-			percentageVelocity2 = 0;
-		}else if(line>1.0){
-			percentageVelocity1 = 0;
-			percentageVelocity2 = 25;
-		}else{
-			percentageVelocity1 = 100;
-			percentageVelocity2 = 100;
-		}
-		readEncoders();
+		integrative += line;
+		integrative = integrative>10.?10.:integrative;
+		integrative = integrative<-10.?-10.:integrative;
+		
+		derivative = line - lastValue;
+		lastValue = line;
+
+		PID = SYSTEM_KP*line + SYSTEM_KI*integrative + SYSTEM_KD*derivative;
+
+		//acionamento dos motores: se nossa saida do PID == -2.5, girar um dos motores apenas para frente na velocidade maxima limite, caso 2.5 girar o outro motor;
+
+		
+		//startMotor1(FORWARD, 50.-20.*PID);
+		//startMotor2(FORWARD, 50.+20.*PID);
 
 		startMotor1(FORWARD, 100);
+		startMotor2(FORWARD, 100);
 
-		readEncoders();
-
-		startMotor2(FORWARD, percentageVelocity2);
 	}
 
 

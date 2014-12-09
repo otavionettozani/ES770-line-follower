@@ -1,24 +1,19 @@
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 85 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 100 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 86 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 101 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 118 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 102 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 119 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 120 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 386 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 404 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 405 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 406 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 407 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 408 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 409 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 411 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 121 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 412 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 413 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 414 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 415 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 416 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 417 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 419 : call of function without prototype
 Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 420 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 425 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 426 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 427 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 439 : call of function without prototype
-Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 443 : call of function without prototype
-Warning[2052] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 449 : unexpected return value
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 421 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 422 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 428 : call of function without prototype
+Warning[2058] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 434 : call of function without prototype
+Warning[2052] C:\Users\Otavio\Documents\GitHub\ES770-line-follower\pwm_sensores_interrupcao.c 457 : unexpected return value
