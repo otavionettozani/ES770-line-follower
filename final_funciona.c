@@ -22,10 +22,10 @@
 #define MOTOR2_KI 0
 #define MOTOR2_KD 0
 
-#define SYSTEM_KP 10.
+#define SYSTEM_KP 20.
 #define SYSTEM_KI 0.
 #define SYSTEM_KD 0.
-#define PERCENTAGE_MAX_VELOCITY 0.35
+#define PERCENTAGE_MAX_VELOCITY 0.5
 #define CORRECTION_MOTOR_1 1.0
 #define CORRECTION_MOTOR_2 0.8
 
@@ -182,7 +182,7 @@ void configPWMTimer(){
 }
 
 void configInterruptionTimer(){
-	OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
+	OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_16);
 	//aprox 0.8s
 }
 
@@ -248,7 +248,7 @@ float readSensors(){
 	ConvertADC();
 	while(BusyADC());
 	adc_leitura = ReadADC();
-	leituras[0] = ((float)adc_leitura - 18944.)*10./44224. + 2.7;
+	leituras[0] = ((float)adc_leitura - 18944.)*10./44224.;
 
 	SetChanADC(ADC_CH4);
 	ConvertADC();
@@ -278,7 +278,7 @@ float readSensors(){
 	ConvertADC();
 	while(BusyADC());
 	adc_leitura = ReadADC();
-	leituras[5] = ((float)adc_leitura - 5632.)*10./47936. -2.3;
+	leituras[5] = ((float)adc_leitura - 5632.)*10./47936.;
 
 	//splines
 	i=0;
@@ -352,10 +352,10 @@ float readSensors(){
 
 
 	//testes
-	/*pontoMinimo=0;
+/*	pontoMinimo=0;
 	sensor_count = 0;
 	for(i=0; i<6; i++){
-		if(leituras[i]<2.5){
+		if(leituras[i]<1.5){
 			pontoMinimo += eixo[i];
 			sensor_count +=1; 
 		}
@@ -363,7 +363,7 @@ float readSensors(){
 	}
 
 	pontoMinimo = sensor_count?pontoMinimo/sensor_count:0;	
-	*/
+*/	
 	return pontoMinimo;
 	
 }
@@ -430,8 +430,8 @@ void PIDCalculate(){
 //------------------   MAIN    -------------------------//
 
 void main(void){
-	int percentageVelocity1, percentageVelocity2;
-	unsigned char lastRead1, lastRead2;
+//	int percentageVelocity1, percentageVelocity2;
+//	unsigned char lastRead1, lastRead2;
 //	float velocityReference1 = 10, velocity1Integrate =0;
 //	float errorMotorVelocity;
 
@@ -458,6 +458,7 @@ void main(void){
 
 	while(1){
 
+		LED_IR_ENABLE = 0;
 		line = readSensors();
 
 
